@@ -1,5 +1,7 @@
 (async () => {
 
+    require('dotenv').config({ path: './.env' })
+
     // DECLARE EXPRESSJS
     const express = require('express')
     const session = require('express-session')
@@ -8,7 +10,7 @@
     const http = require('http')
     const server = http.createServer(app)
     const cors = require('cors')
-    const port = 4444
+    const port = process.env.PORT || 4444
 
 
     // ======================================================================== //
@@ -30,22 +32,22 @@
 
 
     // DATABASE CONFIG
-    const { testConnection, Sequelize, sequelize, mongoose, mongooseConnection } = require('./databases')
+    const { testConnection, Sequelize, sequelize, mongoose, mongooseConnection } = require('./src/databases')
 
     // MODELS
-    const model = require('./models')
+    const model = require('./src/models')
     const models = await model(Sequelize, sequelize, mongoose)
 
     // REPOSITORIES
-    const repository = require('./repositories')
+    const repository = require('./src/repositories')
     const repositories = await repository(models)
 
     // HANDLERS
-    const handler = require('./handlers')
+    const handler = require('./src/handlers')
     const handlers = await handler(repositories)
 
     // CONTROLLERS
-    const controller = require('./controllers')
+    const controller = require('./src/controllers')
     const controllers = await controller(handlers)
 
 
@@ -54,7 +56,7 @@
 
 
     // RUNNING SERVER
-    const routes = require('./routes');
+    const routes = require('./src/routes');
     await routes(app, controllers);
 
     server.listen(port, () => {
