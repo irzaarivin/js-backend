@@ -35,13 +35,13 @@ const validate = (data) => {
     return error;
 }
 
-const createItem = async (repositories, data) => {
-    const { createItem } = repositories.itemRepositories
+const createUser = async (repositories, data) => {
+    const { createUser } = repositories.userRepositories
 
     const validation = validate(data);
     if(validation) return { status: "Failed", error: validation.message }
 
-    const callback = await createItem(data).then(result => {
+    const callback = await createUser(data).then(result => {
         data.id = result[0]
         return data
     })
@@ -50,4 +50,4 @@ const createItem = async (repositories, data) => {
     return { status: "Failed" }
 }
 
-module.exports = createItem
+module.exports = createUser

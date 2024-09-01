@@ -1,8 +1,7 @@
 (async () => {
 
-    require('dotenv').config({ path: './.env' })
-
     // DECLARE EXPRESSJS
+    const config = require('./src/config/config')
     const express = require('express')
     const session = require('express-session')
     const app = express()
@@ -10,7 +9,7 @@
     const http = require('http')
     const server = http.createServer(app)
     const cors = require('cors')
-    const port = process.env.PORT || 4444
+    const port = config.port || 4444
 
 
     // ======================================================================== //
@@ -18,9 +17,9 @@
 
     
     // SERVER CONFIG
-    app.use(session({ secret: 'gacor-kang-mantap-djiwa', resave: true, saveUninitialized: true }))
+    app.use(session({ secret: config.secret, resave: true, saveUninitialized: true }))
     app.use(cors({
-        origin: 'http://localhost:3000'
+        origin: config.origin
     }))
 
     app.use(bodyParser.json());
@@ -32,22 +31,21 @@
 
 
     // DATABASE CONFIG
-    const { testConnection, Sequelize, sequelize, mongoose, mongooseConnection } = require('./src/databases')
+    const { Sequelize, sequelize, mongoose, mongooseConnection } = require('./src/config/database')
+
+    // SOURCE FILE CONFIG
+    const { model, repository, handler, controller, routes } = require('./src/index')
 
     // MODELS
-    const model = require('./src/models')
     const models = await model(Sequelize, sequelize, mongoose)
 
     // REPOSITORIES
-    const repository = require('./src/repositories')
     const repositories = await repository(models)
 
     // HANDLERS
-    const handler = require('./src/handlers')
     const handlers = await handler(repositories)
 
     // CONTROLLERS
-    const controller = require('./src/controllers')
     const controllers = await controller(handlers)
 
 
@@ -56,7 +54,6 @@
 
 
     // RUNNING SERVER
-    const routes = require('./src/routes');
     await routes(app, controllers);
 
     server.listen(port, () => {

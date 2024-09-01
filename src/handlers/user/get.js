@@ -11,22 +11,20 @@ const validate = (data) => {
     return error;
 }
 
-const getSchedules = async (repositories, params) => {
-    const { getSchedules } = repositories.scheduleRepositories
+const getUsers = async (repositories, params) => {
+    const { getUsers } = repositories.userRepositories
 
-    if(params != undefined || params != null || params != {}) {
-        const validation = validate({ sold: params.sold, stock: params.stock, status: params.status });
-        if(validation) return { status: "Failed", error: validation.message }
-    }
-    
+    const validation = validate({ sold: params.sold, stock: params.stock, status: params.status });
+    if(validation) return { status: "Failed", error: validation.message }
+
     const sold = params.sold == 'terlaris' ? 'DESC' : params.sold == 'tersepi' ? 'ASC' : null
     const stock = params.stock == 'terbanyak' ? 'DESC' : params.stock == 'tersedikit' ? 'ASC' : null
     const status = params.status
 
-    const data = await getSchedules({sold, stock, status})
+    const data = await getUsers({sold, stock, status})
 
     if(data) return { status: "Success", data }
     return { status: "Failed" }
 }
 
-module.exports = getSchedules
+module.exports = getUsers

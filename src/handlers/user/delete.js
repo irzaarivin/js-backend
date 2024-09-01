@@ -12,16 +12,16 @@ const validate = (data) => {
     return error;
 }
 
-const updateItem = async (repositories, id) => {
-    const { deleteItem } = repositories.itemRepositories
+const updateUser = async (repositories, id) => {
+    const { deleteUser } = repositories.userRepositories
 
     const validation = validate({id});
     if(validation) return { status: "Failed", error: validation.message }
 
-    const callback = await deleteItem(id)
+    const callback = await deleteUser(id)
 
     if(callback) return { status: "Success", data: callback }
     return { status: "Failed" }
 }
 
-module.exports = updateItem
+module.exports = updateUser

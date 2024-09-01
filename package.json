@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "nodemon app",
     "test": "nodemon --inspect --exitcrash app",
-    "seed": "sequelize db:seed:all --config=config.js",
-    "migrate": "sequelize db:migrate --config=config.js",
-    "migrate:fresh": "sequelize db:migrate:undo:all --config=config.js && sequelize db:migrate --config=config.js",
-    "migrate:fresh:seed": "sequelize db:migrate:undo:all --config=config.js && sequelize db:migrate --config=config.js && sequelize db:seed:all --config=config.js"
+    "seed": "sequelize db:seed:all",
+    "migrate": "sequelize db:migrate",
+    "migrate:fresh": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "migrate:fresh:seed": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +20,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "http": "^0.0.1-security",

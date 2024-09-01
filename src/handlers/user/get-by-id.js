@@ -9,16 +9,16 @@ const validate = (data) => {
     return error;
 }
 
-const getItems = async (repositories, id) => {
-    const { getOneItem } = repositories.itemRepositories
+const getUsers = async (repositories, id) => {
+    const { getOneUser } = repositories.userRepositories
 
     const validation = await validate({id});
     if(validation) return { status: "Failed", error: validation.message }
 
-    const data = await getOneItem(id)
+    const data = await getOneUser(id)
 
     if(data) return { status: "Success", data }
     return { status: "Failed" }
 }
 
-module.exports = getItems
+module.exports = getUsers

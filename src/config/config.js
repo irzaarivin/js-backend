@@ -1,50 +1,46 @@
-require("dotenv").config({ path: "../../.env" });
+require('dotenv').config({ path: '../../.env' });
 
 module.exports = {
-  environment: process.env.NODE_ENV || "development",
+  environment: process.env.NODE_ENV || 'development',
   port: process.env.PORT || 3000,
+  secret: process.env.SECRET || 'anjay-gacor-kang',
+  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
   database: {
-    dialect: process.env.DB_DIALECT || "mysql",
-    host: process.env.DB_HOST || "localhost",
+    dialect: process.env.DB_DIALECT || 'mysql',
+    host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 3306,
-    username: process.env.DB_USER || "postgres",
-    password: process.env.DB_PASS || "password",
-    database: process.env.DB_NAME || "koperasi",
+    username: process.env.DB_USER || 'root', // Ganti sesuai dengan default Anda
+    password: process.env.DB_PASS || 'root', // Ganti sesuai dengan default Anda
+    database: process.env.DB_NAME || 'template', // Ganti sesuai dengan default Anda
   },
   mongo: {
-    url: process.env.MONGO_URL || "mongodb://localhost:27017/mydatabase",
+    url: process.env.MONGO_URL || 'mongodb://localhost:27017/template', // Ganti sesuai dengan default Anda
   },
   development: {
-    // "mongo": {
-    //     "url": process.env.MONGO_URL,
-    //     "database": process.env.MONGO_DATABASE,
-    // },
-    username: process.env.SQL_USERNAME,
-    password: process.env.SQL_PASSWORD,:wq
-    database: process.env.SQL_DATABASE,
-    host: process.env.SQL_HOST,
-    port: process.env.SQL_PORT,
-    dialect: mysql,
+    username: process.env.SQL_USERNAME || 'root',
+    password: process.env.SQL_PASSWORD || 'root',
+    database: process.env.SQL_DATABASE || 'template',
+    host: process.env.SQL_HOST || 'localhost',
+    port: process.env.SQL_PORT || 3306,
+    dialect: process.env.DB_DIALECT || 'mysql',
     logging: false,
   },
   test: {
-    mongo_url: process.env.MONGO_URL,
-    mongo_database: process.env.MONGO_DATABASE,
-    sql_username: process.env.SQL_USERNAME,
-    sql_password: process.env.SQL_PASSWORD,
-    sql_database: process.env.SQL_DATABASE,
-    sql_host: process.env.SQL_HOST,
-    sql_dialect: mysql,
+    username: process.env.SQL_USERNAME || 'root',
+    password: process.env.SQL_PASSWORD || 'root',
+    database: process.env.SQL_DATABASE || 'template',
+    host: process.env.SQL_HOST || 'localhost',
+    port: process.env.SQL_PORT || 3306,
+    dialect: process.env.DB_DIALECT || 'mysql',
     logging: false,
   },
   production: {
-    mongo_url: process.env.MONGO_URL,
-    mongo_database: process.env.MONGO_DATABASE,
-    sql_username: process.env.SQL_USERNAME,
-    sql_password: process.env.SQL_PASSWORD,
-    sql_database: process.env.SQL_DATABASE,
-    sql_host: process.env.SQL_HOST,
-    sql_dialect: mysql,
+    username: process.env.SQL_USERNAME || 'root',
+    password: process.env.SQL_PASSWORD || 'root',
+    database: process.env.SQL_DATABASE || 'template',
+    host: process.env.SQL_HOST || 'localhost',
+    port: process.env.SQL_PORT || 3306,
+    dialect: process.env.DB_DIALECT || 'mysql',
     logging: false,
-  },
+  }
 };

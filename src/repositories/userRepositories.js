@@ -1,8 +1,8 @@
 const { Op } = require('sequelize')
 
-module.exports = async (Item) => {
+module.exports = async (User) => {
     return {
-        getItems: async (params) => {
+        getUsers: async (params) => {
             try {
                 const { sold, stock, status } = params;
 
@@ -21,44 +21,44 @@ module.exports = async (Item) => {
                     orderClause.push(['stock', stock]);
                 }
 
-                const items = await Item.findAll({ where: whereClause, order: orderClause });
+                const users = await User.findAll({ where: whereClause, order: orderClause });
 
-                return items;
+                return users;
             } catch (error) {
                 console.log({error})
                 throw new Error(error)
             }
         },
 
-        getOneItem: async (id) => {
+        getOneUser: async (id) => {
             try {
-                const item = await Item.findOne({
+                const user = await User.findOne({
                     where: { id }
                 });
-                return item;
+                return user;
             } catch (error) {
                 console.error(error);
                 throw new Error(error);
             }
         },
 
-        createItem: async (data) => {
+        createUser: async (data) => {
             try {
-                return await Item.create(data)
+                return await User.create(data)
             } catch (error) {
                 console.log({error})
                 throw new Error(error)
             }
         },
 
-        updateItem: async (id, data) => {
+        updateUser: async (id, data) => {
             try {
-                const [rowsAffected] = await Item.update(data, { where: { id } });
+                const [rowsAffected] = await User.update(data, { where: { id } });
                 if (rowsAffected > 0) {
-                    const updatedItem = await Item.findOne({ where: { id } });
-                    return updatedItem
+                    const updatedUser = await User.findOne({ where: { id } });
+                    return updatedUser
                 } else {
-                    throw new Error("Item tidak ditemukan!")
+                    throw new Error("User tidak ditemukan!")
                 }
             } catch (error) {
                 console.error(error);
@@ -66,13 +66,13 @@ module.exports = async (Item) => {
             }
         },
 
-        deleteItem: async (id) => {
+        deleteUser: async (id) => {
             try {
-                const rowsAffected = await Item.destroy({ where: { id } });
+                const rowsAffected = await User.destroy({ where: { id } });
                 if (rowsAffected > 0) {
-                    return { message: "Item berhasil dihapus" };
+                    return { message: "User berhasil dihapus" };
                 } else {
-                    throw new Error("Item tidak ditemukan")
+                    throw new Error("User tidak ditemukan")
                 }
             } catch (error) {
                 console.error(error);

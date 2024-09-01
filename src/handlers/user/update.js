@@ -34,15 +34,15 @@ const validate = (data) => {
 }
 
 
-const updateItem = async (repositories, { id, data }) => {
-    const { updateItem } = repositories.itemRepositories
+const updateUser = async (repositories, { id, data }) => {
+    const { updateUser } = repositories.userRepositories
 
     console.log({id, ...data})
 
     const validation = validate({id, ...data});
     if(validation) return { status: "Failed", error: validation.message }
 
-    const callback = await updateItem(id, data).then(result => {
+    const callback = await updateUser(id, data).then(result => {
         data.id = result[0]
         return data
     })
@@ -51,4 +51,4 @@ const updateItem = async (repositories, { id, data }) => {
     return { status: "Failed" }
 }
 
-module.exports = updateItem
+module.exports = updateUser

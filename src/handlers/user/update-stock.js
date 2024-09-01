@@ -17,24 +17,24 @@ const validate = (data) => {
 }
 
 
-const updateStockItem = async (repositories, {id, stock}) => {
-    const { updateItem, getOneItem } = repositories.itemRepositories
+const updateStockUser = async (repositories, {id, stock}) => {
+    const { updateUser, getOneUser } = repositories.userRepositories
     id = parseInt(id)
     stock = parseInt(stock)
 
     const validation = await validate({ id: id, stock: stock });
     if(validation) return { status: "Failed", error: validation.message }
 
-    const latest = await getOneItem(id)
-    if(!latest) return { status: "Failed", message: "Item tidak ditemukan" }
+    const latest = await getOneUser(id)
+    if(!latest) return { status: "Failed", message: "User tidak duserukan" }
     
     const updatedData = {}
     updatedData.stock = latest.stock + stock
     if(latest.status = 'unavailable') updatedData.status = 'available'
-    const update = await updateItem(id, updatedData)
+    const update = await updateUser(id, updatedData)
 
     if(update) return { status: "Success", data: update }
     return { status: "Failed" }
 }
 
-module.exports = updateStockItem
+module.exports = updateStockUser
