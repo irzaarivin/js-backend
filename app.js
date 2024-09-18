@@ -34,7 +34,7 @@
     const { Sequelize, sequelize, mongoose, mongooseConnection } = require('./src/config/database')
 
     // SOURCE FILE CONFIG
-    const { model, repository, handler, controller, routes } = require('./src/index')
+    const { model, repository, handler, controller, middlewares, routes } = require('./src/index')
 
     // MODELS
     const models = await model(Sequelize, sequelize, mongoose)
@@ -54,7 +54,7 @@
 
 
     // RUNNING SERVER
-    await routes(app, controllers);
+    await routes(app, controllers, middlewares);
 
     server.listen(port, () => {
         console.log('Server is running on port', port)

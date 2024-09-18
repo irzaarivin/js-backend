@@ -2,9 +2,13 @@ const usersController = async (userHandler) => {
 
     const { getUsers, getUserById, createUser, updateUser, updateStockUser, deleteUser } = await userHandler
 
-    const get = async (req) => {
-        const params = req.query
-        return await getUsers(params)
+    const get = async (req, res, next) => {
+        try {
+            const params = req.query
+            res.send(await getUsers(params))
+        } catch (err) {
+            next(err)
+        }
     }
 
     const getById = async (req) => {
@@ -12,9 +16,13 @@ const usersController = async (userHandler) => {
         return await getUserById(id)
     } 
 
-    const create = async (req) => {
-        const data = req.body
-        return await createUser(data)
+    const create = async (req, res, next) => {
+        try {
+            const data = req.body
+            res.send(await createUser(data))
+        } catch (err) {
+            next(err)
+        }
     }
 
     const update = async (req) => {
