@@ -1,4 +1,5 @@
-require('dotenv').config({ path: '../../.env' });
+// require('dotenv').config({ path: '../../.env' });
+require('dotenv').config({path:__dirname+'/./../../.env'});
 
 module.exports = {
   environment: process.env.NODE_ENV || 'development',
@@ -9,12 +10,12 @@ module.exports = {
     dialect: process.env.DB_DIALECT || 'mysql',
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 3306,
-    username: process.env.DB_USER || 'root', // Ganti sesuai dengan default Anda
-    password: process.env.DB_PASS || 'root', // Ganti sesuai dengan default Anda
-    database: process.env.DB_NAME || 'template', // Ganti sesuai dengan default Anda
+    username: process.env.DB_USER || 'root',
+    password: process.env.DB_PASS || 'root',
+    database: process.env.DB_NAME || 'template',
   },
   mongo: {
-    url: process.env.MONGO_URL || 'mongodb://localhost:27017/template', // Ganti sesuai dengan default Anda
+    url: process.env.MONGO_URL || 'mongodb://localhost:27017/template',
   },
   development: {
     username: process.env.SQL_USERNAME || 'root',

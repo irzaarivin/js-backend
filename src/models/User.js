@@ -1,5 +1,5 @@
-const User = async (Sequelize, sequelize) => {
-  return await sequelize.define('User', {
+module.exports = async (Sequelize, sequelize) => {
+  return await sequelize.define('users', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -35,5 +35,3 @@ const User = async (Sequelize, sequelize) => {
     }
   })
 }
-
-module.exports = User
