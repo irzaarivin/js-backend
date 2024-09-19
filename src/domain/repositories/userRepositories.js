@@ -1,6 +1,6 @@
 const { Op } = require('sequelize')
 
-module.exports = async (User) => {
+module.exports = async ({User}) => {
     return {
         getUsers: async (params) => {
             try {

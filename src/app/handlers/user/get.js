@@ -11,7 +11,7 @@ const validate = (data) => {
     return error;
 }
 
-const getUsers = async (repositories, params) => {
+const getUsers = async (repositories, helpers, params) => {
     const { getUsers } = repositories.userRepositories
 
     const validation = validate({ sold: params.sold, stock: params.stock, status: params.status });
